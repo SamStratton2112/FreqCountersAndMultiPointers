@@ -1,23 +1,23 @@
 // add whatever parameters you deem necessary
-function frequencyCounter(str){
-    let counts = new Map();
-    for(let ltr of str.split('')){
-        // either get current value with key of ltr or create key with value pair of 0
-        let ltrCount = counts.get(ltr) || 0;
-        counts.set(ltr, ltrCount + 1);
-    }
-    return counts;
-}
 
 function constructNote(msg, letters) {
+    function frequencyCounter(str){
+        let counts = new Map();
+        for(let ltr of str.split('')){
+            // either get current value with key of ltr or create key with value pair of 0
+            let ltrCount = counts.get(ltr) || 0;
+            counts.set(ltr, ltrCount + 1);
+        }
+        return counts;
+    }
     // if there aren't at least as long as msg then return false 
-    if(!letters.length >= msg.length) return false;
+    if(letters.length < msg.length) return false;
     // create map of both msg and letters
     let msgMap = frequencyCounter(msg);
     let ltrsMap = frequencyCounter(letters);
     // compare msgMap letters to ltrsMap letters if there are more
     //  of one letter in the msgMap than in the ltrsMap return false
-    for(let ltr of msgMap){
+    for(let ltr of msgMap.keys()){
         if(msgMap.get(ltr) > ltrsMap.get(ltr)) return false;
     }
     return true;
@@ -42,3 +42,4 @@ function constructNote(msg, letters) {
  * compare msg letters to letters return false if letters count < msg requirements
 */
 
+module.exports = constructNote;
